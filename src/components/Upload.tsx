@@ -1,27 +1,33 @@
-import React, { useState } from "react";
+import { ChangeEventHandler, Dispatch, SetStateAction } from "react";
 
 import ImageEditor from "./Editor";
+import { area } from "../types/area";
 
-const ImageUpload = () => {
-  const [image, setImage] = useState<string | ArrayBuffer | null>(null);
+interface ImageUploadProps {
+  crops: area[];
+  setCrops: Dispatch<SetStateAction<area[]>>;
+  handleImageUpload: ChangeEventHandler<HTMLInputElement>;
+  imageUrl: string | null;
+}
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
+const ImageUpload = ({
+  crops,
+  setCrops,
+  handleImageUpload,
+  imageUrl,
+}: ImageUploadProps) => {
   return (
     <div className="w-4/5 flex justify-center items-center">
-      {!image && (
+      {!imageUrl && (
         <input type="file" accept="image/*" onChange={handleImageUpload} />
       )}
-      {image && <ImageEditor imgUrl={image.toString()} />}
+      {imageUrl && (
+        <ImageEditor
+          imgUrl={imageUrl.toString()}
+          crops={crops}
+          setCrops={setCrops}
+        />
+      )}
     </div>
   );
 };

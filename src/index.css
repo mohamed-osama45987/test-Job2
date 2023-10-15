@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ReactCrop__crop-selection {
+  background-color: #433243;
+}

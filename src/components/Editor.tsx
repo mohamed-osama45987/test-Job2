@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
+
+import { area } from "../types/area";
 
 type Crop = {
   unit: "%" | "px";
@@ -11,12 +13,13 @@ type Crop = {
 };
 
 interface ImageEditorProps {
-  imgUrl: string;
+  imgUrl: string | null;
+  crops: never[] | area[];
+  setCrops: Dispatch<SetStateAction<area[]>>;
 }
 
-const ImageEditor = ({ imgUrl }: ImageEditorProps) => {
+const ImageEditor = ({ imgUrl, crops, setCrops }: ImageEditorProps) => {
   const [crop, setCrop] = useState<Crop>();
-  const [completedCrop, setCompletedCrop] = useState<Crop | null>(null);
 
   return (
     <ReactCrop
@@ -24,13 +27,27 @@ const ImageEditor = ({ imgUrl }: ImageEditorProps) => {
       onChange={(newCrop) => setCrop(newCrop)}
       onComplete={(newCrop) => {
         if (newCrop.width && newCrop.height) {
-          setCompletedCrop(newCrop);
+          //@ts-expect-error types
+          setCrops([...crops, newCrop]);
         }
-
-        console.log(completedCrop);
       }}
     >
-      <img src={imgUrl} alt="Uploaded" className="h-full" />
+      <img src={imgUrl ? imgUrl : ""} alt="Uploaded" className="h-full" />
+
+      {crops.map(function (crop: area, index: number) {
+        return (
+          <div
+            key={index}
+            className="absolute bg-black flex justify-center items-center"
+            style={{
+              top: crop?.y,
+              left: crop?.x,
+              width: crop?.width,
+              height: crop?.height,
+            }}
+          />
+        );
+      })}
     </ReactCrop>
   );
 };
