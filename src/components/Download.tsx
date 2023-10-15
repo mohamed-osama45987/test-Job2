@@ -2,11 +2,15 @@ import { area } from "../types/area";
 
 interface DownloadProps {
   imageUrl: string | null;
-  crops: [area] | null;
+  crops: area[];
 }
 
 const Download = ({ imageUrl, crops }: DownloadProps) => {
-  const HandelDownload = async (imageUrl: string, crops: [area]) => {
+  const HandelDownload = async (imageUrl: string | null, crops: area[]) => {
+    if (!imageUrl) {
+      return;
+    }
+
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.src = imageUrl;

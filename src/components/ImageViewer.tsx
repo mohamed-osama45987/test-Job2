@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import Upload from "./Upload";
+import Aside from "./Aside";
 import { area } from "../types/area";
 
 const ImageDisplay = () => {
@@ -28,11 +29,11 @@ const ImageDisplay = () => {
 
   return (
     <section className="border-2 border-red-600 min-h-screen flex">
-      {/* <Aside
+      <Aside
         imageUrl={image ? image.toString() : null}
-        //@ts-expect-error types
         crops={crops}
-      /> */}
+        setCrops={setCrops}
+      />
       <Upload
         crops={crops}
         setCrops={setCrops}

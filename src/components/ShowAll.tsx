@@ -1,8 +1,12 @@
+import { Dispatch, SetStateAction } from "react";
+import { area } from "../types/area";
 
-const ShowAll = () => {
-  return (
-    <div>ShowAll</div>
-  )
+interface ShowAllProps {
+  setCrops: Dispatch<SetStateAction<area[]>>;
 }
 
-export default ShowAll
+const ShowAll = ({ setCrops }: ShowAllProps) => {
+  return <div onClick={() => setCrops([])}>ShowAll</div>;
+};
+
+export default ShowAll;
