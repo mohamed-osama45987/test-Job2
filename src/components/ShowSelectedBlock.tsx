@@ -1,8 +1,22 @@
+import { Dispatch, SetStateAction } from "react";
+import { area } from "../types/area";
 
-const ShowArea = () => {
-  return (
-    <div>ShowArea</div>
-  )
+interface ShowAreaProps {
+  selectedCrop: area | null;
+  setCrops: Dispatch<SetStateAction<area[]>>;
+  crops: area[];
 }
 
-export default ShowArea
+const ShowArea = ({ setCrops, selectedCrop, crops }: ShowAreaProps) => {
+  const handleClick = () => {
+    if (!selectedCrop) {
+      return;
+    }
+
+    setCrops([...crops, selectedCrop]);
+  };
+
+  return <div onClick={handleClick}>ShowArea</div>;
+};
+
+export default ShowArea;

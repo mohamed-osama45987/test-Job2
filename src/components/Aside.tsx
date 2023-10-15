@@ -11,7 +11,6 @@ interface AsideProps {
   crops: area[];
   setCrops: Dispatch<SetStateAction<area[]>>;
   selectedCrop: area | null;
-  setSelectedCrop: Dispatch<SetStateAction<area | null>>;
 }
 
 const Aside = ({
@@ -19,13 +18,16 @@ const Aside = ({
   crops,
   setCrops,
   selectedCrop,
-  setSelectedCrop,
 }: AsideProps) => {
   return (
     <aside className="w-1/5 bg-blue-200">
       <Download imageUrl={imageUrl ? imageUrl : null} crops={crops} />
       <ShowAll setCrops={setCrops} />
-      <ShowSelectedArea />
+      <ShowSelectedArea
+        setCrops={setCrops}
+        selectedCrop={selectedCrop}
+        crops={crops}
+      />
       <HideSelectedArea
         selectedCrop={selectedCrop}
         setCrops={setCrops}

@@ -33,7 +33,6 @@ const ImageDisplay = () => {
   // select certain crop
   const [selectedCrop, setSelectedCrop] = useState<area | null>(null);
 
-
   return (
     <section className="border-2 border-red-600 min-h-screen flex">
       <Aside
@@ -41,7 +40,6 @@ const ImageDisplay = () => {
         crops={crops}
         setCrops={setCrops}
         selectedCrop={selectedCrop}
-        setSelectedCrop={setSelectedCrop}
       />
       <Upload
         crops={crops}
