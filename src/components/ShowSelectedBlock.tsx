@@ -7,16 +7,19 @@ interface ShowAreaProps {
   crops: area[];
 }
 
-const ShowArea = ({ setCrops, selectedCrop, crops }: ShowAreaProps) => {
-  const handleClick = () => {
-    if (!selectedCrop) {
-      return;
-    }
+const ShowArea = ({ selectedCrop, setCrops, crops }: ShowAreaProps) => {
+  const handleClick = function (selectedCrop: area, crops: area[]) {
+    // filter the rest of the crops and remove the selected crop
+    const newCropsArray = crops.filter((crop) => crop.x !== selectedCrop.x);
 
-    setCrops([...crops, selectedCrop]);
+    setCrops(newCropsArray);
   };
 
-  return <div onClick={handleClick}>ShowArea</div>;
+  return (
+    <div onClick={() => (selectedCrop ? handleClick(selectedCrop, crops) : "")}>
+      HideSelectedArea
+    </div>
+  );
 };
 
 export default ShowArea;
