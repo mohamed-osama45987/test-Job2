@@ -17,7 +17,7 @@ const ShowArea = ({ selectedCrop, setCrops, crops }: ShowAreaProps) => {
 
   return (
     <div onClick={() => (selectedCrop ? handleClick(selectedCrop, crops) : "")}>
-      HideSelectedArea
+      ShowSelectedArea
     </div>
   );
 };

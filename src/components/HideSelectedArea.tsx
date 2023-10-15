@@ -16,7 +16,7 @@ const HideArea = ({ setCrops, selectedCrop, crops }: HideAreaProps) => {
     setCrops([...crops, selectedCrop]);
   };
 
-  return <div onClick={handleClick}>HideArea</div>;
+  return <div onClick={handleClick}>HideSelectedArea</div>;
 };
 
 export default HideArea;
