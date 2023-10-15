@@ -38,14 +38,14 @@ const ImageEditor = ({
         }
       }}
     >
-      <img src={imgUrl ? imgUrl : ""} alt="Uploaded" className="h-full" />
+      <img src={imgUrl ? imgUrl : ""} alt="Uploaded" className="h-full " />
 
       {crops.map(function (crop: area, index: number) {
         return (
           <div
             onClick={() => setSelectedCrop(crop)}
             key={index}
-            className="absolute bg-black flex justify-center items-center"
+            className="absolute bg-black flex justify-center items-center cursor-pointer"
             style={{
               top: crop?.y,
               left: crop?.x,

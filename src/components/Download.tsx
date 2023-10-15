@@ -46,7 +46,12 @@ const Download = ({ imageUrl, crops }: DownloadProps) => {
   };
 
   return (
-    <button onClick={() => HandelDownload(imageUrl, crops)}>Download</button>
+    <button
+      className="w-2/3 py-4 bg-purple-600 rounded-full text-white hover:-translate-y-1 transition-transform"
+      onClick={() => HandelDownload(imageUrl, crops)}
+    >
+      Download
+    </button>
   );
 };
 

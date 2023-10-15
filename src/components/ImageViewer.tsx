@@ -5,6 +5,10 @@ import Aside from "./Aside";
 import { area } from "../types/area";
 
 const ImageDisplay = () => {
+
+
+
+
   // all cropped areas
   const [crops, setCrops] = useState<area[]>([
     {
@@ -34,7 +38,7 @@ const ImageDisplay = () => {
   const [selectedCrop, setSelectedCrop] = useState<area | null>(null);
 
   return (
-    <section className="border-2 border-red-600 min-h-screen flex">
+    <section className="min-h-screen flex bg-gray-800">
       <Aside
         imageUrl={image ? image.toString() : null}
         crops={crops}

@@ -16,9 +16,12 @@ const ShowArea = ({ selectedCrop, setCrops, crops }: ShowAreaProps) => {
   };
 
   return (
-    <div onClick={() => (selectedCrop ? handleClick(selectedCrop, crops) : "")}>
+    <button
+      onClick={() => (selectedCrop ? handleClick(selectedCrop, crops) : "")}
+      className="w-2/3 py-4 bg-purple-600 rounded-full text-white hover:-translate-y-1 transition-transform"
+    >
       ShowSelectedArea
-    </div>
+    </button>
   );
 };
 

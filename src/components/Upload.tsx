@@ -1,6 +1,7 @@
 import { ChangeEventHandler, Dispatch, SetStateAction } from "react";
 
 import ImageEditor from "./Editor";
+import Input from "./Input";
 import { area } from "../types/area";
 
 interface ImageUploadProps {
@@ -19,10 +20,8 @@ const ImageUpload = ({
   setSelectedCrop,
 }: ImageUploadProps) => {
   return (
-    <div className="w-4/5 flex justify-center items-center">
-      {!imageUrl && (
-        <input type="file" accept="image/*" onChange={handleImageUpload} />
-      )}
+    <div className="w-4/5 flex justify-center items-center ">
+      {!imageUrl && <Input handleImageUpload={handleImageUpload} />}
       {imageUrl && (
         <ImageEditor
           imgUrl={imageUrl.toString()}
