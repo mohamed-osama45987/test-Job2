@@ -5,6 +5,7 @@ import Aside from "./Aside";
 import { area } from "../types/area";
 
 const ImageDisplay = () => {
+  // all cropped areas
   const [crops, setCrops] = useState<area[]>([
     {
       unit: "%", // Can be 'px' or '%'
@@ -14,6 +15,8 @@ const ImageDisplay = () => {
       height: 0,
     },
   ]);
+
+  // handle image upload
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,18 +30,25 @@ const ImageDisplay = () => {
     }
   };
 
+  // select certain crop
+  const [selectedCrop, setSelectedCrop] = useState<area | null>(null);
+
+
   return (
     <section className="border-2 border-red-600 min-h-screen flex">
       <Aside
         imageUrl={image ? image.toString() : null}
         crops={crops}
         setCrops={setCrops}
+        selectedCrop={selectedCrop}
+        setSelectedCrop={setSelectedCrop}
       />
       <Upload
         crops={crops}
         setCrops={setCrops}
         handleImageUpload={handleImageUpload}
         imageUrl={image ? image.toString() : null}
+        setSelectedCrop={setSelectedCrop}
       />
     </section>
   );

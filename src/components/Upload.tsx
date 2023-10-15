@@ -8,6 +8,7 @@ interface ImageUploadProps {
   setCrops: Dispatch<SetStateAction<area[]>>;
   handleImageUpload: ChangeEventHandler<HTMLInputElement>;
   imageUrl: string | null;
+  setSelectedCrop: Dispatch<SetStateAction<area | null>>;
 }
 
 const ImageUpload = ({
@@ -15,6 +16,7 @@ const ImageUpload = ({
   setCrops,
   handleImageUpload,
   imageUrl,
+  setSelectedCrop,
 }: ImageUploadProps) => {
   return (
     <div className="w-4/5 flex justify-center items-center">
@@ -26,6 +28,7 @@ const ImageUpload = ({
           imgUrl={imageUrl.toString()}
           crops={crops}
           setCrops={setCrops}
+          setSelectedCrop={setSelectedCrop}
         />
       )}
     </div>

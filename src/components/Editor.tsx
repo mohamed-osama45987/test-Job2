@@ -16,9 +16,15 @@ interface ImageEditorProps {
   imgUrl: string | null;
   crops: never[] | area[];
   setCrops: Dispatch<SetStateAction<area[]>>;
+  setSelectedCrop: Dispatch<SetStateAction<area | null>>;
 }
 
-const ImageEditor = ({ imgUrl, crops, setCrops }: ImageEditorProps) => {
+const ImageEditor = ({
+  imgUrl,
+  crops,
+  setCrops,
+  setSelectedCrop,
+}: ImageEditorProps) => {
   const [crop, setCrop] = useState<Crop>();
 
   return (
@@ -37,6 +43,7 @@ const ImageEditor = ({ imgUrl, crops, setCrops }: ImageEditorProps) => {
       {crops.map(function (crop: area, index: number) {
         return (
           <div
+            onClick={() => setSelectedCrop(crop)}
             key={index}
             className="absolute bg-black flex justify-center items-center"
             style={{
