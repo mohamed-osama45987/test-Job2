@@ -1,3 +1,5 @@
+import Steganography from 'ts-steganography';
+
 import { area } from "../types/area";
 
 interface DownloadProps {
@@ -14,7 +16,7 @@ const Download = ({ imageUrl, crops }: DownloadProps) => {
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.src = imageUrl;
-    img.onload = () => {
+    img.onload = async () => {
       // Create a canvas and draw the image on it
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
@@ -37,11 +39,35 @@ const Download = ({ imageUrl, crops }: DownloadProps) => {
       );
 
       // Convert the canvas to a data URL and download it
-      const dataUrl = canvas.toDataURL("image/png");
+      let dataUrl = canvas.toDataURL("image/jpeg",1);
+      const hiddenData =JSON.stringify( {
+        crops :crops,
+        orginalImage:imageUrl
+      })
+       // Use steganography.js to encode the cropsString into the dataUrl
+      
+       dataUrl = await Steganography.encode(hiddenData, dataUrl);
+ 
+      
+
+  // Convert data URL to Blob
+  const byteCharacters = atob(dataUrl.split(',')[1]);
+  const byteNumbers = new Array(byteCharacters.length);
+  for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+  const byteArray = new Uint8Array(byteNumbers);
+  const blob = new Blob([byteArray], {type: 'image/jpeg'});
+
+      // Create object URL
+      const objectUrl = URL.createObjectURL(blob);
+      
       const link = document.createElement("a");
-      link.href = dataUrl;
-      link.download = "Edited_Image.png";
+      link.href = objectUrl;
+      link.download = "Edited_Image.jpeg";
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
     };
   };
 
